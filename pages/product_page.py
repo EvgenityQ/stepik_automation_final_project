@@ -6,6 +6,9 @@ class ProductPage(BasePage):
         link = self.browser.find_element(*ProductPageLocators.BASKET_BUTTON)
         link.click()
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE)
+
     def product_is_added(self):
         book_message = self.browser.find_element(*ProductPageLocators.BOOK_NAME_BASKET)
         book_name = self.browser.find_element(*ProductPageLocators.BOOK_NAME)

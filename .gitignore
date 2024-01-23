@@ -1,0 +1,9 @@
+# Default ignored files
+/.idea
+/shelf/
+/workspace.xml
+conftest.py
+requirements.txt
+/__init__.py
+.pytest_cache
+*.__pycache__

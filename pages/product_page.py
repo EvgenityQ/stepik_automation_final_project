@@ -6,9 +6,6 @@ class ProductPage(BasePage):
         link = self.browser.find_element(*ProductPageLocators.BASKET_BUTTON)
         link.click()
 
-    def should_not_be_success_message(self):
-        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE)
-
     def product_is_added(self):
         book_message = self.browser.find_element(*ProductPageLocators.BOOK_NAME_BASKET)
         book_name = self.browser.find_element(*ProductPageLocators.BOOK_NAME)
@@ -23,6 +20,15 @@ class ProductPage(BasePage):
 
         assert book_message.text in book_name.text, "The Name of the Book is not the same"
         assert book_price_in_basket.text == book_price.text, "Price is not the same"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented"
+
+    def should_success_message_disappear(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE)
+
+
+
 
 
 

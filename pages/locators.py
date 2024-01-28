@@ -2,6 +2,13 @@ from selenium.webdriver.common.by import By
 
 class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    VIEW_BASKET = (By.CSS_SELECTOR,
+                   "#default > header > div.page_inner > div > div.basket-mini.pull-right.hidden-xs > span > a")
+
+class BasketPageLocators():
+    BASKET_ITEM = (By.CSS_SELECTOR, "#basket_formset > div")
+    BASKET_EMPTY_MESSAGE = (By.CSS_SELECTOR, "#content_inner > p")
+
 
 class LoginPageLocators():
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")

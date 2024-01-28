@@ -9,7 +9,7 @@ class LoginPage(BasePage):
         self.should_be_register_form()
 
     def should_be_login_url(self):
-        login = "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
+        login = "https://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
         assert login in self.url, f"The following issue happened {AssertionError}"
 
     def should_be_login_form(self):

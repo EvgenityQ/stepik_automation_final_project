@@ -1,6 +1,7 @@
 import pytest
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
+from .pages.login_page import LoginPage
 import time
 
 link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1"
@@ -17,13 +18,26 @@ link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?prom
 #                                       marks=pytest.mark.xfail)])
 # # "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"])
 
-def test_guest_can_add_product_to_basket(browser):
-    page = ProductPage(browser, link)
-    page.open()
-    page.add_to_card()
-    page.solve_quiz_and_get_code()
-    page.product_is_added()
-    # time.sleep(30)
+class TestUserAddToBasketFromProductPage():
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        link = "https://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
+        page = LoginPage(browser, link)
+        page.open()
+        page.register_new_user()
+        page.should_be_authorized_user()
+    def test_user_can_add_product_to_basket(self, browser):
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_to_card( )
+        page.solve_quiz_and_get_code()
+        page.product_is_added()
+        time.sleep(2)
+
+    def test_user_cant_see_success_message(self, browser):
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
 
 @pytest.mark.skip
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
@@ -32,11 +46,6 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     page.add_to_card()
     page.should_not_be_success_message()
 
-
-def test_guest_cant_see_success_message(browser):
-    page = ProductPage(browser, link)
-    page.open()
-    page.should_not_be_success_message()
 
 @pytest.mark.skip
 def test_message_disappeared_after_adding_product_to_basket(browser):

@@ -1,5 +1,4 @@
 from .base_page import BasePage
-import selenium
 from .locators import LoginPageLocators
 import time
 import random
@@ -25,7 +24,6 @@ class LoginPage(BasePage):
         count = random.randint(1, 1000)
         email = str(time.time() + count) + "@fakemail.org"
         password = str(time.time() + count)
-        register_page = "https://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
         register_email = self.browser.find_element(*LoginPageLocators.REGISTER_EMAIL).send_keys(email)
         register_password = self.browser.find_element(*LoginPageLocators.REGISTER_PASSWORD).send_keys(password)
         register_password_confirm = self.browser.find_element(*LoginPageLocators.REGISTER_PASSWORD_CONFIRM).send_keys(password)
